@@ -12,12 +12,12 @@ class CryptoConverter:
     def convert(have: str, want: str, amount: str):
 
         try:
-            have_ticker = val[have]
+            have_ = val[have]
         except KeyError:
             raise ConvertionException(f'Не удалось обработать валюту "{have}"')
 
         try:
-            want_ticker = val[want]
+            want_ = val[want]
         except KeyError:
             raise ConvertionException(f'Не удалось обработать валюту "{want}"')
 
@@ -29,16 +29,12 @@ class CryptoConverter:
         except ValueError:
             raise ConvertionException(f'"{amount}" не является числом.')
 
-        api_url = f'https://api.api-ninjas.com/v1/convertcurrency?want={want_ticker}&have={have_ticker}&amount={amount}'
-        response = requests.get(api_url, headers={'X-Api-Key': f'{ApiKey}'})
-        if response.status_code == requests.codes.ok:
-            res = json.loads(response.content)['new_amount']
-            print(res)
-            return res
+        api_url = f'https://www.amdoren.com/api/currency.php?api_key={ApiKey}&from={have_}&to={want_}&amount={amount}'
+        response = requests.get(api_url)
+        res = json.loads(response.content)
+        if res['error'] == 0:
+            result = float(res['amount'])
+            return round(result, 6)
         else:
-            raise Exception(f"Error: {response.status_code} {response.text}")
-
-
-CryptoConverter.convert('доллар', 'евро', '1')
-
-
+            print(f"Error: {res['error']} {res['error_message']}")
+            raise Exception(f"Error: {res['error']}\n{res['error_message']}")
