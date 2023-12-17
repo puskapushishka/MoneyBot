@@ -11,7 +11,7 @@ class ConvertionException(Exception):
 # currency conversion using the API and error handling
 class CryptoConverter:
     @staticmethod
-    def convert(have: str, want: str, amount: str):
+    def get_price(have: str, want: str, amount: str):
 
         try:
             have_ = val[have]

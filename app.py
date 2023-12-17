@@ -43,15 +43,15 @@ def convert(message: telebot.types.Message):
         elif len(us_input) < 3:
             raise ConvertionException('Слишком мало параметров.')
 
-        have, want, amount = us_input
-        total = CryptoConverter.convert(have, want, amount)
+        base, quote, amount = us_input
+        total = CryptoConverter.get_price(base, quote, amount)
 
     except ConvertionException as e:
         bot.reply_to(message, f'Ошибка пользователя. \n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
     else:
-        text = f'{amount} {val[have]} = {total} {val[want]}'
+        text = f'{amount} {val[base]} = {total} {val[quote]}'
         bot.send_message(message.chat.id, text)
 
 
