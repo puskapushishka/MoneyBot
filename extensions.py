@@ -29,12 +29,13 @@ class CryptoConverter:
         except ValueError:
             raise ConvertionException(f'"{amount}" не является числом.')
 
-        api_url = f'https://www.amdoren.com/api/currency.php?api_key={ApiKey}&from={have_}&to={want_}&amount={amount}'
+        api_url = f'http://apilayer.net/api/convert?access_key={ApiKey}&from={have_}&to={want_}&amount={amount}'
         response = requests.get(api_url)
         res = json.loads(response.content)
-        if res['error'] == 0:
-            result = float(res['amount'])
+
+        if res['success']:
+            result = float(res['result'])
             return round(result, 6)
         else:
-            print(f"Error: {res['error']} {res['error_message']}")
-            raise Exception(f"Error: {res['error']}\n{res['error_message']}")
+            print(f"Error: {res['error']['code']} {res['error']['info']}")
+            raise Exception(f"Error: {res['error']['code']}\n{res['error']['info']}")

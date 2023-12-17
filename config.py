@@ -1,8 +1,16 @@
 
-ApiKey = 'N3Cp5V68HhytnHdM7tsWFacVz8qY2S'
+ApiKey = "9925f86da5151b4dbcc8e005d0f501dd"
 
 val = {
     'рубль': 'RUB',
     'евро': 'EUR',
     'доллар': 'USD',
+    'тенге': 'KZT',
+    'дирхам': 'AED',
+    'юань': 'CNY',
+    'иена': 'JPY',
+    'ранд': 'ZAR',
+    'лира': 'TRY',
+    'афгани': 'AFN',
+    'песо': 'MXN',
 }

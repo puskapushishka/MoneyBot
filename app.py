@@ -56,6 +56,7 @@ def convert(message: telebot.types.Message):
 try:
     polling()
 except Exception:
-    print("Скорее всего разрыв соединения")
+    print("Ошибка в работе бота")
     time.sleep(60)
+    print("Попытка запуска")
     polling()
