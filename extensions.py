@@ -3,10 +3,12 @@ import json
 from config import ApiKey, val
 
 
+# user error handling class
 class ConvertionException(Exception):
     pass
 
 
+# currency conversion using the API and error handling
 class CryptoConverter:
     @staticmethod
     def convert(have: str, want: str, amount: str):

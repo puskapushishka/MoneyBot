@@ -5,13 +5,14 @@ from config import val
 from extensions import ConvertionException, CryptoConverter
 
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN)  # create bot
 
 
-def polling():
+def polling():  # the bot launch function
     bot.polling()
 
 
+# command processing
 @bot.message_handler(commands=['start', 'help'])
 def start_help(message: telebot.types.Message):
     text = 'Чтобы начать введите команду в следующем формате:\n\
@@ -32,6 +33,7 @@ def values(message: telebot.types.Message):
     bot.reply_to(message, text)
 
 
+# processing messages and sending a response + error handling
 @bot.message_handler(content_types=['text'])
 def convert(message: telebot.types.Message):
     try:
@@ -56,7 +58,7 @@ def convert(message: telebot.types.Message):
 try:
     polling()
 except Exception:
-    print("Ошибка в работе бота")
+    print("an error in the bot's operation")
     time.sleep(60)
-    print("Попытка запуска")
+    print("re-launch")
     polling()
